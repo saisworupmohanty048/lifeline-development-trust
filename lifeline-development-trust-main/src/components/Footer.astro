@@ -1,0 +1,32 @@
+---
+// The site footer — ONE copy, rendered for every page by src/layouts/Site.astro.
+// Starter: replace the name and add this business's real details (address,
+// hours, contact). The links come from the ONE list at the top of
+// src/layouts/Site.astro, the same as the header's. Same container as the
+// header. Never invent facts.
+interface Props {
+  links?: { href: string; label: string }[];
+}
+// eslint-disable-next-line no-undef -- Astro is the component global
+const { links = [] } = Astro.props;
+const brand = "LIFELINE DEVELOPMENT TRUST";
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div><a class="brand-lockup" href="/" aria-label={brand}><img src="/uploads/chat-1540cc18b4a5d84760f1039d95a7f72d132139ff980b62b8c41ed12968f23fcf.webp" width="275" height="275" alt="Lifeline Development Trust — heart and helping hands logo" style="width:140px;height:auto;object-fit:contain;border-radius:6px;"/></a><p>Humanity in action. A community-first commitment to education, health and a more equal tomorrow.</p></div>
+    {
+      links.length > 0 && (
+        <nav aria-label="Footer"><h3>Quick links</h3>
+          {links.map((l) => (
+            <a href={l.href} class="transition-colors hover:text-foreground">
+              {l.label}
+            </a>
+          ))}
+        </nav>
+      )
+    }
+    <div class="footer-links"><h3>Our objectives</h3><a href="/programs#education">Education & Literacy</a><a href="/programs#healthcare">Healthcare Awareness</a><a href="/programs#community">Community Support</a><a href="/programs#environment">Environmental Protection</a></div><div class="footer-links"><h3>Get in touch</h3><span>Registered office<br/>Sorada, Ganjam,<br/>Odisha, India.</span><a href="/contact">Send an enquiry ↗</a><a href="/contact#volunteer">Become a volunteer ↗</a></div>
+  </div><div class="wrap footer-bottom"><span>© {year} {brand}. All rights reserved.</span><div><a href="/privacy">Privacy Policy</a><a href="/terms">Terms</a></div></div>
+</footer>

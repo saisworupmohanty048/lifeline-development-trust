@@ -1,0 +1,32 @@
+---
+// kleap:shared-layout — keep this line: it marks the layout every page shares.
+// The SITE layout: the header and the footer are rendered HERE, once, for every
+// page that wraps itself in <Site>. Pages hold only their own sections — they
+// never import the Header or the Footer and never write a <header>/<footer>.
+// Change the header or footer by editing src/components/Header.astro and
+// src/components/Footer.astro. Takes exactly the same props as Base.
+import type { ComponentProps } from "astro/types";
+import Base from "./Base.astro";
+import '../styles/lifeline.css';
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+type Props = ComponentProps<typeof Base>;
+// eslint-disable-next-line no-undef -- Astro is the component global
+const props = Astro.props;
+// The site's navigation — ONE list, shown by the header AND the footer. Each
+// link points to a page that exists, or to a homepage section: "/#menu".
+const links: { href: string; label: string }[] = [{href:'/',label:'Home'},{href:'/about',label:'About Us'},{href:'/programs',label:'Our Programs'},{href:'/gallery',label:'Gallery & Activities'},{href:'/contact',label:'Contact Us'}];
+---
+
+<Base {...props}>
+  <style is:global>
+    /* The header is sticky: keep "/#section" targets visible below it. */
+    html { scroll-padding-top: 6rem; }
+    html body { font-family: 'Inter', sans-serif; }
+    html :is(h1,h2,h3,h4,h5,h6) { font-family: 'Poppins', sans-serif; }
+  </style>
+  <Header links={links} />
+  <slot />
+  <Footer links={links} />
+</Base>

@@ -1,0 +1,62 @@
+---
+// The site header — ONE copy, rendered for every page by src/layouts/Site.astro.
+// Starter: replace the name and the look for this business. The links come from
+// the ONE list at the top of src/layouts/Site.astro (the footer shows the same).
+// Use the SAME container (max-w-* and px-*) as the homepage sections.
+interface Props {
+  links?: { href: string; label: string }[];
+}
+// eslint-disable-next-line no-undef -- Astro is the component global
+const { links = [] } = Astro.props;
+const brand = "LIFELINE DEVELOPMENT TRUST";
+// eslint-disable-next-line no-undef -- Astro is the component global
+const path = Astro.url.pathname.replace(/\/+$/, "") || "/";
+---
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="/" class="brand-lockup" aria-label={brand + ' home'}><img src="/uploads/chat-1540cc18b4a5d84760f1039d95a7f72d132139ff980b62b8c41ed12968f23fcf.webp" width="275" height="275" alt="Lifeline Development Trust — heart and helping hands logo" style="width:76px;height:auto;object-fit:contain;border-radius:6px;"/></a>
+    {
+      links.length > 0 && (
+        <nav class="desktop-nav" aria-label="Main">
+          {links.map((l) => (
+            <a
+              href={l.href}
+              class:list={[
+                "text-foreground/70 transition-colors hover:text-foreground",
+                path === l.href && "font-medium text-foreground",
+              ]}
+              aria-current={path === l.href ? "page" : undefined}
+            >
+              {l.label}
+            </a>
+          ))}
+        </nav>
+      )
+    }
+    <a class="button gold header-cta" href="/contact#donate">Donate Now ↗</a>
+    {
+      links.length > 0 && (
+        <details class="mobile-menu">
+          <summary aria-label="Open navigation menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+          </summary>
+          <nav aria-label="Mobile navigation">
+            {links.map((l) => (
+              <a
+                href={l.href}
+                class:list={[
+                  "rounded-md px-3 py-3 text-sm text-foreground/80 hover:bg-foreground/5",
+                  path === l.href && "font-medium text-foreground",
+                ]}
+                aria-current={path === l.href ? "page" : undefined}
+              >
+                {l.label}
+              </a>
+            ))}
+          </nav>
+        </details>
+      )
+    }
+  </div>
+</header>
