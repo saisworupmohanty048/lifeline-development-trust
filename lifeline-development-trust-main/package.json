@@ -8,8 +8,9 @@
     "build": "astro build",
     "preview": "wrangler dev",
     "deploy": "astro build && wrangler deploy",
-    "postinstall": "node -e \"const fs=require('fs'),f='node_modules/astro/dist/assets/services/sharp.js';try{const s=fs.readFileSync(f,'utf8');if(/failOnError:\\s*false/.test(s)){fs.writeFileSync(f,s.replace(/failOnError:\\s*false/,'failOn: \\\"none\\\"'));console.log('[kleap] astro sharp service: failOnError:false -> failOn:none')}}catch(e){console.warn('[kleap] astro sharp failOn shim skipped: '+e.message)}\" && node kleap-patch-compiler.mjs"
-  },
+    
+    "postinstall": "node -e \"const fs=require('fs'),f='node_modules/astro/dist/assets/services/sharp.js';try{const s=fs.readFileSync(f,'utf8');if(/failOnError:\\s*false/.test(s)){fs.writeFileSync(f,s.replace(/failOnError:\\s*false/,'failOn: \\\"none\\\"'));console.log('[kleap] astro sharp service: failOnError:false -> failOn:none')}}catch(e){console.warn('[kleap] astro sharp failOn shim skipped: '+e.message)}\""
+
   "dependencies": {
     "@astrojs/cloudflare": "^14.3.3",
     "@astrojs/compiler": "2.13.1",
